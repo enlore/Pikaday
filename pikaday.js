@@ -177,6 +177,10 @@
      */
     defaults = {
 
+        // bind the picker to keydown events so the user can select dates with
+        // the arrow keys and blur off the picker with esc and enter
+        keyboardControls: true,
+
         // bind the picker to a form field
         field: null,
 
@@ -587,7 +591,8 @@
         addEvent(self.el, 'mousedown', self._onMouseDown, true);
         addEvent(self.el, 'touchend', self._onMouseDown, true);
         addEvent(self.el, 'change', self._onChange);
-        addEvent(document, 'keydown', self._onKeyChange);
+        if (this._o.keyboardControls)
+            addEvent(document, 'keydown', self._onKeyChange);
 
         if (opts.field) {
             if (opts.container) {
